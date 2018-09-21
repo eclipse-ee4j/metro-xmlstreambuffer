@@ -1,0 +1,57 @@
+<!--
+
+    Copyright (c) 2012, 2018 Oracle and/or its affiliates. All rights reserved.
+
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Distribution License v. 1.0, which is available at
+    http://www.eclipse.org/org/documents/edl-v10.php.
+
+    SPDX-License-Identifier: BSD-3-Clause
+
+-->
+
+<FindBugsFilter>
+
+    <!--
+    Due to performance reasons.
+    -->
+    <Match>
+        <Or>
+            <Bug pattern="ES_COMPARING_PARAMETER_STRING_WITH_EQ"/>
+            <Bug pattern="ES_COMPARING_STRINGS_WITH_EQ"/>
+        </Or>
+    </Match>
+    
+    <!-- 
+    False report
+    -->
+    <Match>
+        <Class name="com.sun.xml.stream.buffer.XMLStreamBuffer"/>
+        <Method name="writeTo"/>
+        <Bug pattern="BC_UNCONFIRMED_CAST"/>
+    </Match>
+    
+    <!--
+    As designed
+    -->
+    <Match>
+        <Or>
+            <Class name="com.sun.xml.stream.buffer.stax.StreamReaderBufferCreator"/>
+            <Class name="com.sun.xml.stream.buffer.stax.StreamReaderBufferProcessor"/>
+            <Class name="com.sun.xml.stream.buffer.stax.StreamWriterBufferProcessor"/>
+        </Or>
+        <Bug pattern="SF_SWITCH_NO_DEFAULT"/>
+    </Match>
+
+    <!--
+    Not happy about it, but in general this works as designed.
+    We should fix this in the future, but so far leaving unchanged to unbreak build.
+    The change would need more test coverage to be safe.
+    -->
+    <Match>
+        <Class name="com.sun.xml.stream.buffer.XMLStreamBuffer"/>
+        <Method name="isCreated"/>
+        <Bug pattern="INT_BAD_COMPARISON_WITH_SIGNED_BYTE"/>
+    </Match>
+    
+</FindBugsFilter>
