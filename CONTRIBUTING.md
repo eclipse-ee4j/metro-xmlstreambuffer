@@ -20,15 +20,16 @@ more.
 
 The project maintains the following source code repositories
 
-* https://github.com/eclipse-ee4j/metro-saaj
-* https://github.com/eclipse-ee4j/metro-jax-ws
-* https://github.com/eclipse-ee4j/metro-jwsdp-samples
-* https://github.com/eclipse-ee4j/metro-mimepull
-* https://github.com/eclipse-ee4j/metro-package-rename-task
-* https://github.com/eclipse-ee4j/metro-policy
-* https://github.com/eclipse-ee4j/metro-ws-test-harness
-* https://github.com/eclipse-ee4j/metro-wsit
 * https://github.com/eclipse-ee4j/metro-xmlstreambuffer
+* https://github.com/eclipse-ee4j/metro-policy
+* https://github.com/eclipse-ee4j/metro-wsit
+* https://github.com/eclipse-ee4j/metro-mimepull
+* https://github.com/eclipse-ee4j/metro-ws-test-harness
+* https://github.com/eclipse-ee4j/metro-package-rename-task
+* https://github.com/eclipse-ee4j/metro-jax-ws
+* https://github.com/eclipse-ee4j/metro-saaj
+* https://github.com/eclipse-ee4j/metro-jwsdp-samples
+* https://github.com/eclipse-ee4j/jax-rpc-ri
 
 ## Eclipse Contributor Agreement
 
@@ -49,3 +50,5 @@ https://www.eclipse.org/projects/handbook/#resources-commit
 ## Contact
 
 Contact the project developers via the project's "dev" list.
+
+* https://accounts.eclipse.org/mailing-list/metro-dev

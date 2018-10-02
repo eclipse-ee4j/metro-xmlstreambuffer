@@ -22,51 +22,54 @@
     <artifactId>streambuffer</artifactId>
     <version>1.5.7-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>xmlstreambuffer</name>
-    <inceptionYear>2006</inceptionYear>
     <description>Stream based representation for XML infoset</description>
     <url>http://xmlstreambuffer.java.net/</url>
 
     <scm>
-        <connection>scm:git:git@github.com:javaee/metro-xmlstreambuffer.git</connection>
-        <developerConnection>scm:git:git@github.com:javaee/metro-xmlstreambuffer.git</developerConnection>
-        <url>https://github.com/javaee/metro-xmlstreambuffer</url>
+        <connection>scm:git:ssh://git@github.com/eclipse-ee4j/metro-xmlstreambuffer.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/metro-xmlstreambuffer.git</developerConnection>
+        <url>https://github.com/eclipse-ee4j/metro-xmlstreambuffer</url>
         <tag>HEAD</tag>
     </scm>
 
     <licenses>
         <license>
-            <name>
-                Dual license consisting of the CDDL v1.1 and GPL v2
-            </name>
-            <url>https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html</url>
+            <name>Eclipse Distribution License - v 1.0</name>
+            <url>http://www.eclipse.org/org/documents/edl-v10.php</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <name>Martin Grebac</name>
-            <email>martin.grebac@oracle.com</email>
-            <organization>Oracle Corporation</organization>
-        </developer>
-        <developer>
             <name>Lukas Jungmann</name>
             <email>lukas.jungmann@oracle.com</email>
             <organization>Oracle Corporation</organization>
         </developer>
-        <developer>
-            <name>Miroslav Kos</name>
-            <email>miroslav.kos@oracle.com</email>
-            <organization>Oracle Corporation</organization>
-        </developer>
-        <developer>
-            <name>Jaroslav Savytskyi</name>
-            <email>iaroslav.savytskyi@oracle.com</email>
-            <organization>Oracle Corporation</organization>
-        </developer>
     </developers>
+
+    <inceptionYear>2006</inceptionYear>
+
+    <organization>
+        <name>Oracle</name>
+        <url>http://www.oracle.com/</url>
+    </organization>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/eclipse-ee4j/metro-xmlstreambuffer/issues</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>Eclipse Metro mailing list</name>
+            <post>metro-dev@eclipse.org</post>
+            <subscribe>https://accounts.eclipse.org/mailing-list/metro-dev</subscribe>
+            <unsubscribe>https://accounts.eclipse.org/mailing-list/metro-dev</unsubscribe>
+            <archive>https://www.eclipse.org/lists/metro-dev</archive>
+        </mailingList>
+    </mailingLists>
 
     <dependencies>
         <dependency>
