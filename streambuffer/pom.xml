@@ -16,7 +16,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.4</version>
     </parent>
 
     <groupId>com.sun.xml.stream.buffer</groupId>
@@ -25,7 +25,7 @@
     <packaging>jar</packaging>
     <name>xmlstreambuffer</name>
     <description>Stream based representation for XML infoset</description>
-    <url>http://xmlstreambuffer.java.net/</url>
+    <url>https://github.com/eclipse-ee4j/metro-xmlstreambuffer</url>
 
     <scm>
         <connection>scm:git:ssh://git@github.com/eclipse-ee4j/metro-xmlstreambuffer.git</connection>
@@ -50,13 +50,6 @@
         </developer>
     </developers>
 
-    <inceptionYear>2006</inceptionYear>
-
-    <organization>
-        <name>Oracle</name>
-        <url>http://www.oracle.com/</url>
-    </organization>
-
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/metro-xmlstreambuffer/issues</url>
@@ -73,6 +66,7 @@
     </mailingLists>
 
     <properties>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.skip>false</findbugs.skip>
         <findbugs.threshold>Low</findbugs.threshold>
@@ -99,9 +93,13 @@
     </dependencies>
 
     <build>
-
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -153,18 +151,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
                     <version>1.4</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.tmatesoft.svnkit</groupId>
-                            <artifactId>svnkit</artifactId>
-                            <version>1.9.3</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
@@ -188,9 +179,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
-        <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>test</testSourceDirectory>
 
         <plugins>
             <plugin>
@@ -216,6 +204,31 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-legal-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${legal.doc.source}</directory>
+                                    <includes>
+                                        <include>NOTICE.md</include>
+                                        <include>LICENSE.md</include>
+                                    </includes>
+                                    <targetPath>META-INF</targetPath>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
@@ -225,16 +238,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                  <additionalClasspathElements>
-                    <!-- To load resources from test/data directory -->
-                    <additionalClasspathElement>test</additionalClasspathElement>
-                  </additionalClasspathElements>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -247,7 +250,7 @@
                         exclude-common.xml,${findbugs.exclude}
                     </excludeFilterFile>
                     <fork>true</fork>
-                    <jvmArgs>-Xms64m -Xmx256m</jvmArgs>    
+                    <jvmArgs>-Xms64m -Xmx256m</jvmArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -287,9 +290,6 @@
                 <configuration>
                     <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
-                    <providerImplementations>
-                        <svn>javasvn</svn>
-                    </providerImplementations>
                     <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <revisionOnScmFailure>false</revisionOnScmFailure>
                 </configuration>
@@ -301,21 +301,18 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>                
+            </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <archive>  
+                    <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>                        
-                        <manifestEntries>
-                            <Implementation-Build-Id>${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
-                        </manifestEntries>
-                    </archive> 
+                        </manifest>
+                    </archive>
                 </configuration>
-            </plugin>  
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -326,6 +323,12 @@
                         <goals>
                             <goal>manifest</goal>
                         </goals>
+                        <configuration>
+                            <instructions>
+                                <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
+                                <_noee>true</_noee>
+                            </instructions>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -346,7 +349,8 @@
                             <goal>compile</goal>
                         </goals>
                         <configuration>
-                            <release>9</release>
+                            <source>9</source>
+                            <target>9</target>
                         </configuration>
                     </execution>
                     <execution>
@@ -362,14 +366,10 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <release>9</release>
-                </configuration>
             </plugin>
         </plugins>
-
     </build>
-    
+
     <reporting>
         <plugins>
             <plugin>
