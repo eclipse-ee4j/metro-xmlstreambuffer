@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2019 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -54,12 +54,12 @@ public class StreamReaderBufferCreator extends StreamBufferCreator {
      * The stream reader must be positioned at the start of the document
      * or the start of an element.
      * <p>
-     * If the stream is positioned at the start of the document then the 
-     * whole document is stored and after storing the stream will be positioned 
+     * If the stream is positioned at the start of the document then the
+     * whole document is stored and after storing the stream will be positioned
      * at the end of the document.
      * <p>
-     * If the stream is positioned at the start of an element then the 
-     * element and all its children will be stored and after storing the stream 
+     * If the stream is positioned at the start of an element then the
+     * element and all its children will be stored and after storing the stream
      * will be positioned at the next event after the end of the element.
      * <p>
      * @return the mutable stream buffer.
@@ -79,10 +79,10 @@ public class StreamReaderBufferCreator extends StreamBufferCreator {
      * Creates the buffer from a stream reader that is an element fragment.
      * <p>
      * The stream reader will be moved to the position of the next start of
-     * an element if the stream reader is not already positioned at the start 
+     * an element if the stream reader is not already positioned at the start
      * of an element.
      * <p>
-     * The element and all its children will be stored and after storing the stream 
+     * The element and all its children will be stored and after storing the stream
      * will be positioned at the next event after the end of the element.
      * <p>
      * @param storeInScopeNamespaces true if in-scope namespaces of the element
@@ -135,7 +135,7 @@ public class StreamReaderBufferCreator extends StreamBufferCreator {
             default:
                 throw new XMLStreamException("XMLStreamReader not positioned at a document or element");
         }
-        
+
         increaseTreeCount();
     }
 
@@ -306,10 +306,10 @@ public class StreamReaderBufferCreator extends StreamBufferCreator {
      * this method. Note that there is no way to enumerate namespaces from XMLStreamReader.
      *
      * For e.g: Say the SOAP message is as follows
-     *
-     *  <S:Envelope xmlns:n1=".."><S:Body><ns2:A> ...
-     *
-     * when xsb is to be created using a reader that is at <ns2:A> tag, the inscope
+     * <pre>{@code
+     *  <S:Envelope xmlns:n1=".."><S:Body><ns2:A> ...}
+     * </pre>
+     * when xsb is to be created using a reader that is at {@code <ns2:A>} tag, the inscope
      * namespace like 'n1' can be passed using this method.
      *
      * WARNING: Instead of using this, try other methods(if you don't know what you are
