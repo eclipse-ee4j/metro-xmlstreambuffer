@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -66,10 +66,16 @@
     </mailingLists>
 
     <properties>
+        <copyright.exclude>${project.basedir}/copyright-exclude</copyright.exclude>
+        <copyright.ignoreyear>false</copyright.ignoreyear>
+        <copyright.scmonly>true</copyright.scmonly>
+        <copyright.update>false</copyright.update>
+        <spotbugs.exclude>${project.basedir}/exclude.xml</spotbugs.exclude>
+        <spotbugs.skip>false</spotbugs.skip>
+        <spotbugs.threshold>Low</spotbugs.threshold>
+        <spotbugs.version>3.1.11</spotbugs.version>
+
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
-        <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
-        <findbugs.skip>false</findbugs.skip>
-        <findbugs.threshold>Low</findbugs.threshold>
     </properties>
 
     <dependencies>
@@ -77,6 +83,12 @@
             <groupId>org.jvnet.staxex</groupId>
             <artifactId>stax-ex</artifactId>
             <version>1.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>1.2.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -113,7 +125,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -123,29 +135,17 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.20</version>
+                    <version>3.0.0-M3</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>3.0.5</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.glassfish.findbugs</groupId>
-                            <artifactId>findbugs</artifactId>
-                            <version>1.7</version>
-                        </dependency>
-                    </dependencies>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.glassfish.copyright</groupId>
                     <artifactId>glassfish-copyright-maven-plugin</artifactId>
-                    <version>1.50</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.7</version>
+                    <version>2.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -155,17 +155,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.5.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <version>4.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -195,12 +190,12 @@
                 <configuration>
                     <rules>
                         <requireJavaVersion>
-                            <version>[1.6,)</version>
+                            <version>[1.7,)</version>
                         </requireJavaVersion>
                         <requireMavenVersion>
                             <version>[3.0.3,)</version>
                         </requireMavenVersion>
-                        <DependencyConvergence />
+                        <dependencyConvergence />
                     </rules>
                 </configuration>
             </plugin>
@@ -233,22 +228,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <additionalOptions>-Xdoclint:none</additionalOptions>
+                    <release>11</release>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
                 <configuration>
-                    <skip>${findbugs.skip}</skip>
-                    <threshold>${findbugs.threshold}</threshold>
+                    <skip>${spotbugs.skip}</skip>
+                    <threshold>${spotbugs.threshold}</threshold>
                     <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                     <excludeFilterFile>
-                        exclude-common.xml,${findbugs.exclude}
+                        ${spotbugs.exclude}
                     </excludeFilterFile>
                     <fork>true</fork>
                     <jvmArgs>-Xms64m -Xmx256m</jvmArgs>
@@ -258,32 +249,22 @@
                 <groupId>org.glassfish.copyright</groupId>
                 <artifactId>glassfish-copyright-maven-plugin</artifactId>
                 <configuration>
-                    <templateFile>${project.basedir}/copyright.txt</templateFile>
-                    <excludeFile>${project.basedir}/copyright-exclude</excludeFile>
-                    <scm>git</scm>
+                    <excludeFile>${copyright.exclude}</excludeFile>
                     <!-- skip files not under SCM-->
-                    <scmOnly>true</scmOnly>
-                    <!-- turn off warnings -->
-                    <warn>true</warn>
+                    <scmOnly>${copyright.scmonly}</scmOnly>
                     <!-- for use with repair -->
-                    <update>false</update>
+                    <update>${copyright.update}</update>
                     <!-- check that year is correct -->
-                    <ignoreYear>false</ignoreYear>
+                    <ignoreYear>${copyright.ignoreyear}</ignoreYear>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <configuration>
-                    <formats>
-                        <format>xml</format>
-                    </formats>
-                    <check>
-                      <totalLineRate>45</totalLineRate>
-                      <packageLineRate>40</packageLineRate>
-                      <haltOnFailure>true</haltOnFailure>
-                    </check>
-                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -291,8 +272,8 @@
                 <configuration>
                     <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <timestampFormat>{0,date,yyyy-MM-dd'T'HH:mm:ssZ}</timestampFormat>
-                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
                     <revisionOnScmFailure>false</revisionOnScmFailure>
+                    <shortRevisionLength>7</shortRevisionLength>
                 </configuration>
                 <executions>
                     <execution>
@@ -329,6 +310,10 @@
                             <instructions>
                                 <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}, ${timestamp}</Implementation-Build-Id>
                                 <_noee>true</_noee>
+                                <Import-Package>
+                                    javax.activation;version=!,
+                                    *
+                                </Import-Package>
                             </instructions>
                         </configuration>
                     </execution>
@@ -336,16 +321,10 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <executions>
                     <execution>
+                        <!--compile all as JPMS module-->
                         <id>default-compile</id>
                         <goals>
                             <goal>compile</goal>
@@ -356,6 +335,7 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <!--replace classes with source/target 7-->
                         <id>base-compile</id>
                         <goals>
                             <goal>compile</goal>
@@ -367,19 +347,55 @@
                             </excludes>
                         </configuration>
                     </execution>
+                    <execution>
+                        <!--compile test classes with source/target 7-->
+                        <id>default-testCompile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <release>11</release>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.5</version>
-            </plugin>
-        </plugins>
-    </reporting>
-
+    <profiles>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jacoco</groupId>
+                            <artifactId>jacoco-maven-plugin</artifactId>
+                            <version>0.8.3</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>default-report</id>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
