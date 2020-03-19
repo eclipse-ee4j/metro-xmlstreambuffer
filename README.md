@@ -27,4 +27,5 @@ the terms of [Eclipse Contributor Agreement](http://www.eclipse.org/legal/ECA.ph
 
 ## Links
 
+* [Javadoc](https://javadoc.io/doc/com.sun.xml.stream.buffer/streambuffer/latest/com.sun.xml.streambuffer/module-summary.html)
 * [Mailing list](https://accounts.eclipse.org/mailing-list/metro-dev)
