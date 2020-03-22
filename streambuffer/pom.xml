@@ -74,7 +74,7 @@
         <spotbugs.exclude>${project.basedir}/exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>3.1.12.1</spotbugs.version>
+        <spotbugs.version>4.0.0</spotbugs.version>
 
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
     </properties>
@@ -111,7 +111,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -121,7 +121,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -239,7 +239,6 @@
                         ${spotbugs.exclude}
                     </excludeFilterFile>
                     <fork>true</fork>
-                    <jvmArgs>-Xms64m -Xmx256m</jvmArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -287,6 +286,7 @@
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                         <manifest>
+                            <addDefaultEntries>false</addDefaultEntries>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
@@ -304,8 +304,8 @@
                         </goals>
                         <configuration>
                             <instructions>
-                                <_removeheaders>Bnd-LastModified,Built-By,Include-Resource</_removeheaders>
-                                <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}</Implementation-Build-Id>
+                                <_noextraheaders>true</_noextraheaders>
+                                <Implementation-Build-Id>${project.version} - ${buildNumber}</Implementation-Build-Id>
                                 <Import-Package>
                                     javax.activation;version=!,
                                     *
@@ -346,10 +346,11 @@
                 <configuration>
                     <archive>
                         <manifest>
+                            <addDefaultEntries>false</addDefaultEntries>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Implementation-Build-Id>${project.version} - ${scmBranch}-${buildNumber}</Implementation-Build-Id>
+                            <Implementation-Build-Id>${project.version} - ${buildNumber}</Implementation-Build-Id>
                         </manifestEntries>
                     </archive>
                 </configuration>
