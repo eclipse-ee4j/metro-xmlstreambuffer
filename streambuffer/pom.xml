@@ -337,10 +337,6 @@
                             <instructions>
                                 <_noextraheaders>true</_noextraheaders>
                                 <Implementation-Build-Id>${project.version} - ${buildNumber}</Implementation-Build-Id>
-                                <Import-Package>
-                                    javax.activation;version=!,
-                                    *
-                                </Import-Package>
                             </instructions>
                         </configuration>
                     </execution>
