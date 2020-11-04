@@ -74,7 +74,7 @@
         <spotbugs.exclude>${project.basedir}/exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.0.4</spotbugs.version>
+        <spotbugs.version>4.1.4</spotbugs.version>
 
         <stax-ex.version>2.0.0</stax-ex.version>
         <activation.version>2.0.0</activation.version>
@@ -393,7 +393,7 @@
                         <plugin>
                             <groupId>org.jacoco</groupId>
                             <artifactId>jacoco-maven-plugin</artifactId>
-                            <version>0.8.5</version>
+                            <version>0.8.6</version>
                         </plugin>
                     </plugins>
                 </pluginManagement>
