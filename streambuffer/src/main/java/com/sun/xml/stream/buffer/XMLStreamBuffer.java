@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -127,7 +127,7 @@ public abstract class XMLStreamBuffer {
      * <code>true</code> if the buffer has been created.
      */
     public final boolean isCreated() {
-        return _structure.getArray()[0] != AbstractCreatorProcessor.T_END;
+        return _structure.getArray()[0] != (byte) AbstractCreatorProcessor.T_END;
     }
 
     /**
