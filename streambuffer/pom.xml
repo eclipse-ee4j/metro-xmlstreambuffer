@@ -22,7 +22,7 @@
 
     <groupId>com.sun.xml.stream.buffer</groupId>
     <artifactId>streambuffer</artifactId>
-    <version>1.5.10-SNAPSHOT</version>
+    <version>1.5.10</version>
     <packaging>jar</packaging>
     <name>xmlstreambuffer</name>
     <description>Stream based representation for XML infoset</description>
