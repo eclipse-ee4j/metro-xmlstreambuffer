@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -37,12 +37,14 @@ public class StreamWriterBufferProcessor extends AbstractProcessor {
     
     
     public StreamWriterBufferProcessor() {
+        super();
     }
 
     /**
      * @deprecated
      *      Use {@link #StreamWriterBufferProcessor(XMLStreamBuffer, boolean)}
      */
+    @Deprecated
     public StreamWriterBufferProcessor(XMLStreamBuffer buffer) {
         setXMLStreamBuffer(buffer,buffer.isFragment());
     }
@@ -73,6 +75,7 @@ public class StreamWriterBufferProcessor extends AbstractProcessor {
      * @deprecated
      *      Use {@link #setXMLStreamBuffer(XMLStreamBuffer, boolean)}
      */
+    @Deprecated
     public void setXMLStreamBuffer(XMLStreamBuffer buffer) {
         setBuffer(buffer);
     }
@@ -402,7 +405,7 @@ public class StreamWriterBufferProcessor extends AbstractProcessor {
      */
     private void writeAttributes(XMLStreamWriter writer, boolean inscope) throws XMLStreamException {
         // prefixSet to collect prefixes that are written before writing inscope namespaces
-        Set<String> prefixSet = inscope ? new HashSet<String>() : Collections.<String>emptySet();
+        Set<String> prefixSet = inscope ? new HashSet<>() : Collections.<String>emptySet();
         int item = peekStructure();
         if ((item & TYPE_MASK) == T_NAMESPACE_ATTRIBUTE) {
             // Skip the namespace declarations on the element

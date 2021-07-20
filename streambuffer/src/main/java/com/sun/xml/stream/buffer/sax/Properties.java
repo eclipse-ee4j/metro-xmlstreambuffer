@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2004-2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2004-2021 Oracle and/or its affiliates. All rights reserved.
  *
  * Oracle licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -18,6 +18,10 @@
 package com.sun.xml.stream.buffer.sax;
 
 public class Properties {
+
+    private Properties() {
+    }
+
     public static final String LEXICAL_HANDLER_PROPERTY =
             "http://xml.org/sax/properties/lexical-handler";
     public static final String DTD_DECLARATION_HANDLER_PROPERTY =

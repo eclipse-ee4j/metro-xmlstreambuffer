@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -221,7 +221,7 @@ public class InscopeNamespaceTest extends TestCase {
         XMLStreamReader reader = createXMLStreamReader(new ByteArrayInputStream(requestStr.getBytes()));
         reader.next();// go to start element: S:Header
         // Collect namespaces on soap:Header
-        Map<String,String> namespaces = new HashMap<String,String>();
+        Map<String,String> namespaces = new HashMap<>();
         for(int i=0; i< reader.getNamespaceCount();i++){
             namespaces.put(reader.getNamespacePrefix(i), reader.getNamespaceURI(i));
         }
@@ -261,7 +261,7 @@ public class InscopeNamespaceTest extends TestCase {
         XMLStreamReader reader = createXMLStreamReader(new ByteArrayInputStream(requestStr.getBytes()));
         reader.next();// go to start element: S:Header
         // Collect namespaces on soap:Header
-        Map<String,String> namespaces = new HashMap<String,String>();
+        Map<String,String> namespaces = new HashMap<>();
         for(int i=0; i< reader.getNamespaceCount();i++){
             namespaces.put(reader.getNamespacePrefix(i), reader.getNamespaceURI(i));
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -12,9 +12,10 @@
  * Stream based representation for XML infoset
  */
 module com.sun.xml.streambuffer {
-    requires java.xml;
+
+    requires transitive java.xml;
     requires jakarta.activation;
-    requires org.jvnet.staxex;
+    requires transitive org.jvnet.staxex;
 
     exports com.sun.xml.stream.buffer;
     exports com.sun.xml.stream.buffer.sax;

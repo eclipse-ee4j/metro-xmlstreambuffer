@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -41,45 +41,56 @@ public class EmptyBufferTest extends BaseBufferTestCase {
         b.writeTo(new ContentHandler() {
             boolean _startDocument = false;
             
+            @Override
             public void setDocumentLocator(Locator locator) {
             }
 
+            @Override
             public void startDocument() throws SAXException {
                 _startDocument = true;
             }
 
+            @Override
             public void endDocument() throws SAXException {
                 assertEquals(true, _startDocument);
             }
 
+            @Override
             public void startPrefixMapping(String prefix, String uri) throws SAXException {
                 assertEquals(false, _startDocument);
             }
 
+            @Override
             public void endPrefixMapping(String prefix) throws SAXException {
                 assertEquals(false, _startDocument);
             }
 
+            @Override
             public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
                 assertEquals(false, _startDocument);
             }
 
+            @Override
             public void endElement(String uri, String localName, String qName) throws SAXException {
                 assertEquals(false, _startDocument);
             }
 
+            @Override
             public void characters(char[] ch, int start, int length) throws SAXException {
                 assertEquals(false, _startDocument);
             }
 
+            @Override
             public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
                 assertEquals(false, _startDocument);
             }
 
+            @Override
             public void processingInstruction(String target, String data) throws SAXException {
                 assertEquals(false, _startDocument);
             }
 
+            @Override
             public void skippedEntity(String name) throws SAXException {
                 assertEquals(false, _startDocument);
             }
