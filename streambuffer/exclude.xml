@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 2012, 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2012, 2021 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -21,8 +21,8 @@
             <Bug pattern="ES_COMPARING_STRINGS_WITH_EQ"/>
         </Or>
     </Match>
-    
-    <!-- 
+
+    <!--
     False report
     -->
     <Match>
@@ -30,7 +30,7 @@
         <Method name="writeTo"/>
         <Bug pattern="BC_UNCONFIRMED_CAST"/>
     </Match>
-    
+
     <!--
     As designed
     -->
@@ -53,5 +53,5 @@
         <Method name="isCreated"/>
         <Bug pattern="INT_BAD_COMPARISON_WITH_SIGNED_BYTE"/>
     </Match>
-    
+
 </FindBugsFilter>
