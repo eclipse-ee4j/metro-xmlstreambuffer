@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -56,7 +56,7 @@ public class MarkTest extends BaseBufferTestCase {
         verifyTag(reader, SOAP_NAMESPACE_URI, SOAP_ENVELOPE);
 
         // Collect namespaces on soap:Envelope
-        Map<String,String> namespaces = new HashMap<String,String>();
+        Map<String,String> namespaces = new HashMap<>();
         for (int i = 0; i < reader.getNamespaceCount(); i++) {
             namespaces.put(reader.getNamespacePrefix(i), reader.getNamespaceURI(i));
         }
@@ -66,7 +66,7 @@ public class MarkTest extends BaseBufferTestCase {
         verifyReaderState(reader,
                 XMLStreamReader.START_ELEMENT);
 
-        List<XMLStreamBufferMark> marks = new ArrayList<XMLStreamBufferMark>();
+        List<XMLStreamBufferMark> marks = new ArrayList<>();
         StreamReaderBufferCreator creator = new StreamReaderBufferCreator(new MutableXMLStreamBuffer());
 
         if (reader.getLocalName() == SOAP_HEADER
@@ -86,7 +86,7 @@ public class MarkTest extends BaseBufferTestCase {
 
                     // Collect namespaces on SOAP header block
                     if (reader.getNamespaceCount() > 0) {
-                        headerBlockNamespaces = new HashMap<String,String>();
+                        headerBlockNamespaces = new HashMap<>();
                         headerBlockNamespaces.putAll(namespaces);
                         for (int i = 0; i < reader.getNamespaceCount(); i++) {
                             headerBlockNamespaces.put(reader.getNamespacePrefix(i), reader.getNamespaceURI(i));

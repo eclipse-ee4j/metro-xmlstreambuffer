@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -19,9 +19,6 @@ import javax.xml.stream.XMLStreamReader;
 
 import junit.framework.*;
 
-import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
@@ -98,14 +95,17 @@ public class NamespaceTest extends TestCase {
     	int endPrefixCount = 0;    	
     	boolean element_z_Ended = false;
     	boolean prefix_e_Ended = false;    	
+            @Override
 		public void startPrefixMapping(String prefix, String uri) throws SAXException {
 			startPrefixCount ++;
 		}
+            @Override
 		public void endPrefixMapping(String prefix) throws SAXException {
 			endPrefixCount ++;
 			if (element_z_Ended && "e".equals(prefix)) prefix_e_Ended = true;
 			
 		}
+            @Override
 		public void endElement(String uri, String localName, String qName) throws SAXException {
 			if ("z".equals(localName)) element_z_Ended = true;			
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -76,6 +76,7 @@ final public class NamespaceContexHelper implements NamespaceContextEx {
 
     // NamespaceContext interface
 
+    @Override
     public String getNamespaceURI(String prefix) {
         if (prefix == null) throw new IllegalArgumentException();
 
@@ -91,6 +92,7 @@ final public class NamespaceContexHelper implements NamespaceContextEx {
         return "";
     }
 
+    @Override
     public String getPrefix(String namespaceURI) {
         if (namespaceURI == null) throw new IllegalArgumentException();
 
@@ -111,10 +113,11 @@ final public class NamespaceContexHelper implements NamespaceContextEx {
         return null;
     }
 
-    public Iterator getPrefixes(String namespaceURI) {
+    @Override
+    public Iterator<String> getPrefixes(String namespaceURI) {
         if (namespaceURI == null) throw new IllegalArgumentException();
 
-        List<String> l = new ArrayList<String>();
+        List<String> l = new ArrayList<>();
 
         NAMESPACE_LOOP: for (int i = namespacePosition - 1; i >= 0; i--) {
             final String declaredNamespaceURI = namespaceURIs[i];
@@ -135,12 +138,13 @@ final public class NamespaceContexHelper implements NamespaceContextEx {
 
     // NamespaceContextEx interface
 
+    @Override
     public Iterator<NamespaceContextEx.Binding> iterator() {
         if (namespacePosition == 2)
-            return Collections.EMPTY_LIST.iterator();
+            return Collections.<NamespaceContextEx.Binding>emptyList().iterator();
 
         final List<NamespaceContextEx.Binding> namespaces =
-                new ArrayList<NamespaceContextEx.Binding>(namespacePosition);
+                new ArrayList<>(namespacePosition);
 
         NAMESPACE_LOOP: for (int i = namespacePosition - 1; i >= 2; i--) {
             final String declaredPrefix = prefixes[i];
@@ -164,10 +168,12 @@ final public class NamespaceContexHelper implements NamespaceContextEx {
             this.index = index;
         }
 
+        @Override
         public String getPrefix() {
             return prefixes[index];
         }
 
+        @Override
         public String getNamespaceURI() {
             return namespaceURIs[index];
         }
