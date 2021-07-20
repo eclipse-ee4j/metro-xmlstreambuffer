@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -15,21 +15,23 @@ package com.sun.xml.stream.buffer;
  * and from infoset in API-specific form.
  */
 public class AbstractCreator extends AbstractCreatorProcessor {
-    
+
     protected MutableXMLStreamBuffer _buffer;
-    
+
+    protected AbstractCreator() {}
+
     public void setXMLStreamBuffer(MutableXMLStreamBuffer buffer) {
         if (buffer == null) {
             throw new NullPointerException("buffer cannot be null");
         }
         setBuffer(buffer);
     }
-    
+
     public MutableXMLStreamBuffer getXMLStreamBuffer() {
         return _buffer;
     }
-    
-    
+
+
     protected final void createBuffer() {
         setBuffer(new MutableXMLStreamBuffer());
     }
@@ -43,7 +45,7 @@ public class AbstractCreator extends AbstractCreatorProcessor {
 
     protected final void setBuffer(MutableXMLStreamBuffer buffer) {
         _buffer = buffer;
-        
+
         _currentStructureFragment = _buffer.getStructure();
         _structure = _currentStructureFragment.getArray();
         _structurePtr = 0;
@@ -55,23 +57,23 @@ public class AbstractCreator extends AbstractCreatorProcessor {
         _currentContentCharactersBufferFragment = _buffer.getContentCharactersBuffer();
         _contentCharactersBuffer = _currentContentCharactersBufferFragment.getArray();
         _contentCharactersBufferPtr = 0;
-        
+
         _currentContentObjectFragment = _buffer.getContentObjects();
         _contentObjects = _currentContentObjectFragment.getArray();
         _contentObjectsPtr = 0;
     }
-    
+
     protected final void setHasInternedStrings(boolean hasInternedStrings) {
         _buffer.setHasInternedStrings(hasInternedStrings);
     }
-    
+
     protected final void storeStructure(int b) {
         _structure[_structurePtr++] = (byte)b;
         if (_structurePtr == _structure.length) {
             resizeStructure();
         }
     }
-    
+
     protected final void resizeStructure() {
         _structurePtr = 0;
         if (_currentStructureFragment.getNext() != null) {
@@ -79,17 +81,17 @@ public class AbstractCreator extends AbstractCreatorProcessor {
             _structure = _currentStructureFragment.getArray();
         } else {
             _structure = new byte[_structure.length];
-            _currentStructureFragment = new FragmentedArray(_structure, _currentStructureFragment);
+            _currentStructureFragment = new FragmentedArray<>(_structure, _currentStructureFragment);
         }
     }
-    
+
     protected final void storeStructureString(String s) {
         _structureStrings[_structureStringsPtr++] = s;
         if (_structureStringsPtr == _structureStrings.length) {
             resizeStructureStrings();
         }
     }
-    
+
     protected final void resizeStructureStrings() {
         _structureStringsPtr = 0;
         if (_currentStructureStringFragment.getNext() != null) {
@@ -97,22 +99,22 @@ public class AbstractCreator extends AbstractCreatorProcessor {
             _structureStrings = _currentStructureStringFragment.getArray();
         } else {
             _structureStrings = new String[_structureStrings.length];
-            _currentStructureStringFragment = new FragmentedArray(_structureStrings, _currentStructureStringFragment);
+            _currentStructureStringFragment = new FragmentedArray<>(_structureStrings, _currentStructureStringFragment);
         }
     }
-    
+
     protected final void storeContentString(String s) {
         storeContentObject(s);
     }
-    
-    protected final void storeContentCharacters(int type, char[] ch, int start, int length) {        
+
+    protected final void storeContentCharacters(int type, char[] ch, int start, int length) {
         if (_contentCharactersBufferPtr + length >= _contentCharactersBuffer.length) {
             if (length >= 512) {
                 storeStructure(type | CONTENT_TYPE_CHAR_ARRAY_COPY);
                 storeContentCharactersCopy(ch, start, length);
                 return;
             }
-            resizeContentCharacters();            
+            resizeContentCharacters();
         }
 
         if (length < CHAR_ARRAY_LENGTH_SMALL_SIZE) {
@@ -125,13 +127,13 @@ public class AbstractCreator extends AbstractCreatorProcessor {
             storeStructure(length >> 8);
             storeStructure(length & 255);
             System.arraycopy(ch, start, _contentCharactersBuffer, _contentCharactersBufferPtr, length);
-            _contentCharactersBufferPtr += length;        
+            _contentCharactersBufferPtr += length;
         } else {
             storeStructure(type | CONTENT_TYPE_CHAR_ARRAY_COPY);
             storeContentCharactersCopy(ch, start, length);
         }
     }
-    
+
     protected final void resizeContentCharacters() {
         _contentCharactersBufferPtr = 0;
         if (_currentContentCharactersBufferFragment.getNext() != null) {
@@ -139,11 +141,11 @@ public class AbstractCreator extends AbstractCreatorProcessor {
             _contentCharactersBuffer = _currentContentCharactersBufferFragment.getArray();
         } else {
             _contentCharactersBuffer = new char[_contentCharactersBuffer.length];
-            _currentContentCharactersBufferFragment = new FragmentedArray(_contentCharactersBuffer, 
+            _currentContentCharactersBufferFragment = new FragmentedArray<>(_contentCharactersBuffer,
                     _currentContentCharactersBufferFragment);
         }
     }
-    
+
     protected final void storeContentCharactersCopy(char[] ch, int start, int length) {
         char[] copyOfCh = new char[length];
         System.arraycopy(ch, start, copyOfCh, 0, length);
@@ -153,14 +155,14 @@ public class AbstractCreator extends AbstractCreatorProcessor {
     protected final Object peekAtContentObject() {
         return _contentObjects[_contentObjectsPtr];
     }
-    
+
     protected final void storeContentObject(Object s) {
         _contentObjects[_contentObjectsPtr++] = s;
         if (_contentObjectsPtr == _contentObjects.length) {
             resizeContentObjects();
         }
     }
-    
+
     protected final void resizeContentObjects() {
         _contentObjectsPtr = 0;
         if (_currentContentObjectFragment.getNext() != null) {
@@ -168,7 +170,7 @@ public class AbstractCreator extends AbstractCreatorProcessor {
             _contentObjects = _currentContentObjectFragment.getArray();
         } else {
             _contentObjects = new Object[_contentObjects.length];
-            _currentContentObjectFragment = new FragmentedArray(_contentObjects, _currentContentObjectFragment);
+            _currentContentObjectFragment = new FragmentedArray<>(_contentObjects, _currentContentObjectFragment);
         }
-    }    
+    }
 }

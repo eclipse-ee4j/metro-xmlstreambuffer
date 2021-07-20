@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -68,7 +68,7 @@ public class OverrideNamespaceTest extends TestCase {
     }
 
     public void testOverrideNamespace1() throws Exception {
-        Map<String, String> ns = new LinkedHashMap<String, String>();
+        Map<String, String> ns = new LinkedHashMap<>();
         ns.put("definitions", "http://wsdl");
         ns.put("types", "http://types");
         ns.put("binding", "http://wsdl");

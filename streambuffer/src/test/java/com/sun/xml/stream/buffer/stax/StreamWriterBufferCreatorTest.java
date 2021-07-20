@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -21,7 +21,9 @@ import javax.xml.stream.XMLStreamWriter;
  * @author Kohsuke Kawaguchi
  */
 public class StreamWriterBufferCreatorTest extends BaseBufferTestCase {
-    
+
+    public StreamWriterBufferCreatorTest() {}
+
     public void testSimple() throws Exception {
         MutableXMLStreamBuffer buffer = new MutableXMLStreamBuffer();
         XMLStreamWriter writer = buffer.createFromXMLStreamWriter();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -78,12 +78,14 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
     protected int _namespaceAttributesStackIndex;
 
     public SAXBufferProcessor() {
+        super();
     }
 
     /**
      * @deprecated
      *      Use {@link #SAXBufferProcessor(XMLStreamBuffer, boolean)}
      */
+    @Deprecated
     public SAXBufferProcessor(XMLStreamBuffer buffer) {
         setXMLStreamBuffer(buffer);
     }
@@ -97,6 +99,7 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
         setXMLStreamBuffer(buffer,produceFragmentEvent);
     }
 
+    @Override
     public boolean getFeature(String name)
             throws SAXNotRecognizedException, SAXNotSupportedException {
         if (name.equals(Features.NAMESPACES_FEATURE)) {
@@ -115,6 +118,7 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
         }
     }
     
+    @Override
     public void setFeature(String name, boolean value)
             throws SAXNotRecognizedException, SAXNotSupportedException {
         if (name.equals(Features.NAMESPACES_FEATURE)) {
@@ -137,6 +141,7 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
         }        
     }
     
+    @Override
     public Object getProperty(String name)
             throws SAXNotRecognizedException, SAXNotSupportedException {
         if (name.equals(Properties.LEXICAL_HANDLER_PROPERTY)) {
@@ -146,6 +151,7 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
         }
     }
     
+    @Override
     public void setProperty(String name, Object value)
             throws SAXNotRecognizedException, SAXNotSupportedException {
         if (name.equals(Properties.LEXICAL_HANDLER_PROPERTY)) {
@@ -159,34 +165,42 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
         }
     }
     
+    @Override
     public void setEntityResolver(EntityResolver resolver) {
         _entityResolver = resolver;
     }
     
+    @Override
     public EntityResolver getEntityResolver() {
         return _entityResolver;
     }
     
+    @Override
     public void setDTDHandler(DTDHandler handler) {
         _dtdHandler = handler;
     }
     
+    @Override
     public DTDHandler getDTDHandler() {
         return _dtdHandler;
     }
     
+    @Override
     public void setContentHandler(ContentHandler handler) {
         _contentHandler = handler;
     }
     
+    @Override
     public ContentHandler getContentHandler() {
         return _contentHandler;
     }
     
+    @Override
     public void setErrorHandler(ErrorHandler handler) {
         _errorHandler = handler;
     }
     
+    @Override
     public ErrorHandler getErrorHandler() {
         return _errorHandler;
     }
@@ -199,11 +213,13 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
         return _lexicalHandler;
     }
     
+    @Override
     public void parse(InputSource input) throws IOException, SAXException {
         // InputSource is ignored
         process();
     }
     
+    @Override
     public void parse(String systemId) throws IOException, SAXException {
         // systemId is ignored
         process();
@@ -215,6 +231,7 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
      * @deprecated
      *      Use {@link #process(XMLStreamBuffer, boolean)}
      */
+    @Deprecated
     public final void process(XMLStreamBuffer buffer) throws SAXException {
         setXMLStreamBuffer(buffer);
         process();
@@ -238,6 +255,7 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
      * @deprecated
      *      Use {@link #setXMLStreamBuffer(XMLStreamBuffer, boolean)}.
      */
+    @Deprecated
     public void setXMLStreamBuffer(XMLStreamBuffer buffer) {
         setBuffer(buffer);
     }
@@ -420,7 +438,7 @@ public class SAXBufferProcessor extends AbstractProcessor implements XMLReader {
         boolean hasAttributes = false;
         boolean hasNamespaceAttributes = false;
         int item = peekStructure();
-        Set<String> prefixSet = inscope ? new HashSet<String>() : Collections.<String>emptySet();
+        Set<String> prefixSet = inscope ? new HashSet<>() : Collections.<String>emptySet();
         if ((item & TYPE_MASK) == T_NAMESPACE_ATTRIBUTE) {
             cacheNamespacePrefixStartingIndex();
             hasNamespaceAttributes = true;
