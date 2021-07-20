@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -75,10 +75,10 @@ public class MutableXMLStreamBuffer extends XMLStreamBuffer {
      * If the <code>size</code> argument is less than <code>0</code>.
      */
     public MutableXMLStreamBuffer(int size) {
-        _structure = new FragmentedArray<byte[]>(new byte[size]);
-        _structureStrings = new FragmentedArray<String[]>(new String[size]);
-        _contentCharactersBuffer = new FragmentedArray<char[]>(new char[4096]);
-        _contentObjects = new FragmentedArray<Object[]>(new Object[size]);
+        _structure = new FragmentedArray<>(new byte[size]);
+        _structureStrings = new FragmentedArray<>(new String[size]);
+        _contentCharactersBuffer = new FragmentedArray<>(new char[4096]);
+        _contentObjects = new FragmentedArray<>(new Object[size]);
 
         // Set the first element of structure array to indicate an empty buffer
         // that has not been created

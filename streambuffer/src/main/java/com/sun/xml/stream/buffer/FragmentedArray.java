@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,7 +10,7 @@
 
 package com.sun.xml.stream.buffer;
 
-final class FragmentedArray<T> {
+public final class FragmentedArray<T> {
     private T _item;
     private FragmentedArray<T> _next;
     private FragmentedArray<T> _previous;

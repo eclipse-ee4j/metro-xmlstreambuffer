@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2019 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -86,6 +86,7 @@ public class XMLStreamBufferResult extends SAXResult {
         }
     }
 
+    @Override
     public ContentHandler getHandler() {
         if (_bufferCreator == null) {
             _bufferCreator = new SAXBufferCreator(_buffer);
@@ -97,6 +98,7 @@ public class XMLStreamBufferResult extends SAXResult {
         return _bufferCreator;
     }
 
+    @Override
     public LexicalHandler getLexicalHandler() {
         return (LexicalHandler) getHandler();
     }

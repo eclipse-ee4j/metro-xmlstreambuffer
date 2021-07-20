@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -25,14 +25,14 @@ public class Base64Test extends BaseBufferTestCase {
     byte[] bytes = {0, 1, 2, 3};
     Base64Data data;
     String base64EncodedString;
-    
+
     /** Creates a new instance of Base64Test */
     public Base64Test() {
         data = new Base64Data();
         data.set(bytes, null);
         base64EncodedString = data.toString();
     }
-    
+
     MutableXMLStreamBuffer createBuffer() throws Exception {
         MutableXMLStreamBuffer buffer = new MutableXMLStreamBuffer();
         XMLStreamWriterEx writer = (XMLStreamWriterEx)buffer.createFromXMLStreamWriter();
@@ -41,12 +41,12 @@ public class Base64Test extends BaseBufferTestCase {
         writer.writeBinary(bytes, 0, bytes.length, null);
         writer.writeEndElement();
         writer.writeEndDocument();
-        
+
         assertTrue(buffer.isCreated());
-        
+
         return buffer;
     }
-    
+
     public void testReadingAsString() throws Exception {
         MutableXMLStreamBuffer buffer = createBuffer();
 
@@ -62,7 +62,7 @@ public class Base64Test extends BaseBufferTestCase {
         assertEquals(XMLStreamConstants.END_ELEMENT,reader.next());
         verifyTag(reader,null,"foo");
     }
-    
+
     void readPCData(XMLStreamReaderEx reader) throws Exception {
         assertEquals(XMLStreamConstants.START_DOCUMENT,reader.getEventType());
 
@@ -82,21 +82,21 @@ public class Base64Test extends BaseBufferTestCase {
         assertEquals(XMLStreamConstants.END_ELEMENT,reader.next());
         verifyTag(reader,null,"foo");
     }
-    
+
     public void testReadingAsPCDATA() throws Exception {
         MutableXMLStreamBuffer buffer = createBuffer();
 
         XMLStreamReaderEx reader = (XMLStreamReaderEx)buffer.readAsXMLStreamReader();
         readPCData(reader);
     }
-    
+
     public void testReadingAsPCDATAUsingCopyOfBuffer() throws Exception {
         MutableXMLStreamBuffer originalBuffer = createBuffer();
         XMLStreamReaderEx originalReader = (XMLStreamReaderEx)originalBuffer.readAsXMLStreamReader();
-        
+
         MutableXMLStreamBuffer buffer = new MutableXMLStreamBuffer();
         buffer.createFromXMLStreamReader(originalReader);
-        
+
         XMLStreamReaderEx reader = (XMLStreamReaderEx)buffer.readAsXMLStreamReader();
         readPCData(reader);
     }

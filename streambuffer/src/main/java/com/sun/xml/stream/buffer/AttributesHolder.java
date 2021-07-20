@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -38,6 +38,7 @@ public final class AttributesHolder implements Attributes {
         _strings = new String[DEFAULT_CAPACITY * ITEM_SIZE];
     }
 
+    @Override
     public final int getLength() {
         return _attributeCount;
     }
@@ -47,31 +48,37 @@ public final class AttributesHolder implements Attributes {
             _strings[(index << 3) + PREFIX] : null;
     }
 
+    @Override
     public final String getLocalName(int index) {
         return (index >= 0 && index < _attributeCount) ?
             _strings[(index << 3) + LOCAL_NAME] : null;
     }
 
+    @Override
     public final String getQName(int index) {
         return (index >= 0 && index < _attributeCount) ?
             _strings[(index << 3) + QNAME] : null;
     }
 
+    @Override
     public final String getType(int index) {
         return (index >= 0 && index < _attributeCount) ?
             _strings[(index << 3) + TYPE] : null;
     }
 
+    @Override
     public final String getURI(int index) {
         return (index >= 0 && index < _attributeCount) ?
             _strings[(index << 3) + URI] : null;
     }
 
+    @Override
     public final String getValue(int index) {
         return (index >= 0 && index < _attributeCount) ?
             _strings[(index << 3) + VALUE] : null;
     }
 
+    @Override
     public final int getIndex(String qName) {
         for (int i = 0; i < _attributeCount; i++) {
             if (qName.equals(_strings[(i << 3) + QNAME])) {
@@ -81,16 +88,19 @@ public final class AttributesHolder implements Attributes {
         return -1;
     }
 
+    @Override
     public final String getType(String qName) {
         final int i = (getIndex(qName) << 3) + TYPE;
         return (i >= 0) ? _strings[i] : null;
     }
 
+    @Override
     public final String getValue(String qName) {
         final int i = (getIndex(qName) << 3) + VALUE;
         return (i >= 0) ? _strings[i] : null;
     }
 
+    @Override
     public final int getIndex(String uri, String localName) {
         for (int i = 0; i < _attributeCount; i++) {
             if (localName.equals(_strings[(i << 3) + LOCAL_NAME]) &&
@@ -101,11 +111,13 @@ public final class AttributesHolder implements Attributes {
         return -1;
     }
 
+    @Override
     public final String getType(String uri, String localName) {
         final int i = (getIndex(uri, localName) << 3) + TYPE;
         return (i >= 0) ? _strings[i] : null;
     }
 
+    @Override
     public final String getValue(String uri, String localName) {
         final int i = (getIndex(uri, localName) << 3) + VALUE;
         return (i >= 0) ? _strings[i] : null;
