@@ -34,4 +34,4 @@ jobs:
         distribution: 'zulu'
         java-version: ${{ matrix.java_version }}
     - name: Verify
-      run: cd streambuffer && mvn -B -V -U -C -Poss-release clean verify org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true
+      run: cd streambuffer && mvn -B -V -U -C -Poss-release,staging clean verify org.glassfish.copyright:glassfish-copyright-maven-plugin:check -Dgpg.skip=true
