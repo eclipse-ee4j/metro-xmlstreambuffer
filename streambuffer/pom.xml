@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 1997, 2021 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2022 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -74,14 +74,15 @@
         <spotbugs.exclude>${project.basedir}/exclude.xml</spotbugs.exclude>
         <spotbugs.skip>false</spotbugs.skip>
         <spotbugs.threshold>Low</spotbugs.threshold>
-        <spotbugs.version>4.3.0</spotbugs.version>
+        <spotbugs.version>4.5.3.0</spotbugs.version>
 
-        <stax-ex.version>2.1.0-M1</stax-ex.version>
-        <activation.version>2.1.0-RC1</activation.version>
+        <stax-ex.version>2.1.0-M2</stax-ex.version>
+        <activation.version>2.1.0</activation.version>
         <junit.version>4.13.2</junit.version>
-        <woodstox-core.version>6.2.6</woodstox-core.version>
+        <woodstox-core.version>6.2.8</woodstox-core.version>
 
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
+        <maven.compiler.release>11</maven.compiler.release>
     </properties>
 
     <dependencyManagement>
@@ -137,17 +138,17 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0-M3</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -172,27 +173,27 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
-                    <version>1.4</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.2.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.1</version>
+                    <version>5.1.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.10.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>3.0.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -256,7 +257,10 @@
                         </manifest>
                     </archive>
                     <release>11</release>
+                    <doclint>all,-missing</doclint>
                     <notimestamp>true</notimestamp>
+                    <failOnWarnings>true</failOnWarnings>
+                    <quiet>true</quiet>
                 </configuration>
             </plugin>
             <plugin>
@@ -265,7 +269,6 @@
                 <configuration>
                     <skip>${spotbugs.skip}</skip>
                     <threshold>${spotbugs.threshold}</threshold>
-                    <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                     <excludeFilterFile>
                         ${spotbugs.exclude}
                     </excludeFilterFile>
@@ -285,14 +288,6 @@
                     <ignoreYear>${copyright.ignoreyear}</ignoreYear>
                     <quiet>false</quiet>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -347,27 +342,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>9</release>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>
+                        <arg>-Xdoclint:all,-missing</arg>
                     </compilerArgs>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>base-compile</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <release>8</release>
-                            <excludes>
-                                <exclude>module-info.java</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
