@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -10,6 +10,8 @@
 
 package com.sun.xml.stream.buffer;
 
+import junit.framework.TestCase;
+
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamException;
 
@@ -18,7 +20,7 @@ import javax.xml.stream.XMLStreamException;
  *
  * @author Paul Sandoz
  */
-public abstract class BaseBufferTestCase extends junit.framework.TestCase {
+public abstract class BaseBufferTestCase extends TestCase {
     protected BaseBufferTestCase() {
     }
 
