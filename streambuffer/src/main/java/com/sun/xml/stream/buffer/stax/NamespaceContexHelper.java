@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -181,7 +181,7 @@ final public class NamespaceContexHelper implements NamespaceContextEx {
 
     /**
      * Declare a default namespace.
-     * <p>
+     *
      * @param namespaceURI the namespace URI to declare, may be null.
      */
     public void declareDefaultNamespace(String namespaceURI) {
@@ -201,7 +201,7 @@ final public class NamespaceContexHelper implements NamespaceContextEx {
      * the value of the prefix parameter.
      * A namespace may be undeclared by passing <code>null</code> as the
      * value of the namespaceURI parameter.
-     * <p>
+     *
      * @param prefix the namespace prefix to declare, may not be null.
      * @param namespaceURI the namespace URI to declare, may be null.
      * @throws IllegalArgumentException if the prefix is null.
