@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Distribution License v. 1.0, which is available at
@@ -41,7 +41,7 @@ public class StreamReaderBufferCreator extends StreamBufferCreator {
 
     /**
      * Create a stream reader buffer creator using a mutable stream buffer.
-     * <p>
+     *
      * @param buffer the mutable stream buffer.
      */
     public StreamReaderBufferCreator(MutableXMLStreamBuffer buffer) {
@@ -61,7 +61,7 @@ public class StreamReaderBufferCreator extends StreamBufferCreator {
      * If the stream is positioned at the start of an element then the
      * element and all its children will be stored and after storing the stream
      * will be positioned at the next event after the end of the element.
-     * <p>
+     *
      * @return the mutable stream buffer.
      * @throws XMLStreamException if the stream reader is not positioned at
      *         the start of the document or at an element.
@@ -84,7 +84,7 @@ public class StreamReaderBufferCreator extends StreamBufferCreator {
      * <p>
      * The element and all its children will be stored and after storing the stream
      * will be positioned at the next event after the end of the element.
-     * <p>
+     *
      * @param storeInScopeNamespaces true if in-scope namespaces of the element
      *        fragment should be stored.
      * @return the mutable stream buffer.
