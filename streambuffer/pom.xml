@@ -79,7 +79,7 @@
         <stax-ex.version>2.1.0</stax-ex.version>
         <activation.version>2.1.0</activation.version>
         <junit.version>4.13.2</junit.version>
-        <woodstox-core.version>6.2.8</woodstox-core.version>
+        <woodstox-core.version>6.4.0</woodstox-core.version>
 
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
         <maven.compiler.release>11</maven.compiler.release>
