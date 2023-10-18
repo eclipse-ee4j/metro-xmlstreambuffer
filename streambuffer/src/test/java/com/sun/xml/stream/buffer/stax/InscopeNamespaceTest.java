@@ -282,6 +282,8 @@ public class InscopeNamespaceTest extends TestCase {
 
     private XMLStreamReader createXMLStreamReader(InputStream is) throws Exception {
         XMLInputFactory readerFactory = XMLInputFactory.newInstance();
+        readerFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        readerFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
         return readerFactory.createXMLStreamReader(is);
     }
 

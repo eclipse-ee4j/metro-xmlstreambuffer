@@ -87,6 +87,8 @@ public class NamespaceTest extends TestCase {
     static XMLStreamReader getReader(String xml) throws Exception {
     	ByteArrayInputStream is = new ByteArrayInputStream(xml.getBytes());
         XMLInputFactory readerFactory = XMLInputFactory.newInstance();
+        readerFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        readerFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
         return readerFactory.createXMLStreamReader(is);
     }
     
